@@ -18,8 +18,7 @@ def trigger_background_tasks(request):
 @api_view(['DELETE'])
 def terminate_task(request, task_name):
     """
-    Terminates a scheduled background task by name.
-    This only works if the task has not yet started executing.
+    Terminates a scheduled background task by name if the task has not yet started executing.
     """
     tasks_deleted, _ = Task.objects.filter(task_name=task_name).delete()
     
