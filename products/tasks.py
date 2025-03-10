@@ -36,4 +36,4 @@ def update_products_recurring_dynamic():
     for product in products:
         product.price += 10  
         product.save()
-    print("✅ Products updated successfully!")
+    print("Products updated successfully!")
