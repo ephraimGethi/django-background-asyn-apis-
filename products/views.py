@@ -2,10 +2,19 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Product, Order
 from .serializers import ProductSerializer, OrderSerializer
-from .tasks import update_products, update_orders,update_products_recurring,update_products_recurring_dynamic
+from .tasks import *
 from background_task.models import Task
 from rest_framework.views import APIView
 from rest_framework import status
+
+from django.http import JsonResponse
+
+def custom_404_handler(request, exception=None):
+    return JsonResponse(
+        {"error": "Invalid API path. Please check the URL."},
+        status=404
+    )
+
 
 @api_view(['GET'])
 def trigger_background_tasks(request):
@@ -46,7 +55,7 @@ class StartRecurringTaskView(APIView):
     """
 
     def post(self, request):
-        update_products_recurring(repeat=600)  
+        # update_products_recurring(repeat=600)  
         return Response({"message": "Recurring task scheduled successfully."}, status=status.HTTP_201_CREATED)
 
 

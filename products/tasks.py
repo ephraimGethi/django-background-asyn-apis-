@@ -19,7 +19,7 @@ def update_orders():
 
 
 
-@background(schedule=60, repeat=600)  # Run every 10 minutes
+@background(schedule=60)  # Run every 10 minutes
 def update_products_recurring():
     products = Product.objects.all()
     for product in products:
